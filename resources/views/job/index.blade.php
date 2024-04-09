@@ -23,6 +23,19 @@
                             type="number" />
                     </div>
                 </div>
+                <div>
+                    <div class="mb-1 font-semibold">
+                        Experience
+                    </div>
+                    <x-radio-group name='experience' :options="App\Models\JobPost::$experience" />
+
+                </div>
+                <div>
+                    <div class="mb-1 font-semibold">
+                        Field
+                    </div>
+                    <x-radio-group name='category' :options="App\Models\JobPost::$category" />
+                </div>
             </div>
             <button class="w-full py-2 hover:bg-slate-100" type="submit">Filter</button>
         </form>
