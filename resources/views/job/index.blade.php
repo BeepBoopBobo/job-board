@@ -2,14 +2,14 @@
     <x-breadcrumbs :links="['Jobs'=>route('jobs.index')]" class="mb-2">
     </x-breadcrumbs>
 
-    <x-card class="mb-4 text-sm">
-        <form id="filter-form" action="{{route('jobs.index')}}" method="GET">
+    <x-card class="mb-4 text-sm" x-data="">
+        <form action="{{route('jobs.index')}}" method="GET" x-ref="filter-form">
             <div class="mb-4 grid grid-cols-2 gap-2">
                 <div>
                     <div class="mb-1 font-semibold">
                         Search
                     </div>
-                    <x-text-input name="search" form-id='filter-form' value="{{request('search')}}"
+                    <x-text-input name="search" form-ref='filter-form' value="{{request('search')}}"
                         placeholder="Search by text" type="text" />
                 </div>
                 <div>
@@ -17,9 +17,9 @@
                         Salary
                     </div>
                     <div class="flex space-x-2">
-                        <x-text-input name="min_salary" form-id='filter-form' value="{{request('min_salary')}}"
+                        <x-text-input name="min_salary" form-ref='filter-form' value="{{request('min_salary')}}"
                             placeholder="From" type="number" />
-                        <x-text-input name="max_salary" form-id='filter-form' value="{{request('max_salary')}}"
+                        <x-text-input name="max_salary" form-ref='filter-form' value="{{request('max_salary')}}"
                             placeholder="To" type="number" />
                     </div>
                 </div>
@@ -37,7 +37,9 @@
                     <x-radio-group name='category' :options="App\Models\JobPost::$category" />
                 </div>
             </div>
-            <button class="w-full py-2 hover:bg-slate-100" type="submit">Filter</button>
+            <x-button class="w-full">
+                Filter
+            </x-button>
         </form>
 
     </x-card>

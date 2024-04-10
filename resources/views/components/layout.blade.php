@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full">
 
 <head>
     <meta charset="utf-8">
@@ -7,10 +7,11 @@
 
     <title>Laravel Job Board</title>
 
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css','resources/js/app.js'])
 </head>
 
-<body class="mx-auto mt-10 max-w-2xl bg-slate-200 text-slate-700">
+<body
+    class="mx-auto h-full bg-no-repeat bg-fixed mt-10 max-w-2xl text-slate-700 bg-gradient-to-b from-indigo-500 via-purple-500 to-pink-500">
     {{$slot}}
 </body>
 
