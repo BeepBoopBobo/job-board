@@ -3,24 +3,24 @@
     </x-breadcrumbs>
 
     <x-card class="mb-4 text-sm">
-        <form action="{{route('jobs.index')}}" method="GET">
+        <form id="filter-form" action="{{route('jobs.index')}}" method="GET">
             <div class="mb-4 grid grid-cols-2 gap-2">
                 <div>
                     <div class="mb-1 font-semibold">
                         Search
                     </div>
-                    <x-text-input name="search" value="{{request('search')}}" placeholder="Search by text"
-                        type="text" />
+                    <x-text-input name="search" form-id='filter-form' value="{{request('search')}}"
+                        placeholder="Search by text" type="text" />
                 </div>
                 <div>
                     <div class="mb-1 font-semibold">
                         Salary
                     </div>
                     <div class="flex space-x-2">
-                        <x-text-input name="min_salary" value="{{request('min_salary')}}" placeholder="From"
-                            type="number" />
-                        <x-text-input name="max_salary" value="{{request('max_salary')}}" placeholder="To"
-                            type="number" />
+                        <x-text-input name="min_salary" form-id='filter-form' value="{{request('min_salary')}}"
+                            placeholder="From" type="number" />
+                        <x-text-input name="max_salary" form-id='filter-form' value="{{request('max_salary')}}"
+                            placeholder="To" type="number" />
                     </div>
                 </div>
                 <div>
