@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use \App\Models\JobPost;
+use \App\Models\Employer;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\JobPost>
@@ -19,11 +20,11 @@ class JobPostFactory extends Factory
     {
         return [
             'title' => fake()->jobTitle,
-            'category' => fake()->randomElement(JobPost::$category),
-            'experience' => fake()->randomElement(JobPost::$experience),
             'description' => fake()->paragraphs(3, true),
-            'salary' => fake()->numberBetween(30_000, 150_000),
+            'salary' => fake()->numberBetween(5_000, 150_000),
             'location' => fake()->city,
+            'category' => fake()->randomElement(JobPost::$category),
+            'experience' => fake()->randomElement(JobPost::$experience)
         ];
     }
 }
