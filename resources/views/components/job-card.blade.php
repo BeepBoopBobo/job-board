@@ -9,7 +9,7 @@
     </div>
     <div class="mb-4 flex justify-between text-slate-500">
         <div class="flex space-x-2">
-            <div>Company,</div>
+            <div>{{$job->employer->company_name}},</div>
             <div>
                 {{$job->location}}
             </div>

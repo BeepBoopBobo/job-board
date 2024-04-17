@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 
 class JobPost extends Model
@@ -25,12 +27,29 @@ class JobPost extends Model
         return $this->belongsTo(\App\Models\Employer::class);
     }
 
+    public function jobApplications(): HasMany
+    {
+        return $this->hasMany(\App\Models\JobApplication::class);
+    }
+
+    public function hasUserApplied(Authenticatable|User|int $user): bool
+    {
+        return $this->where('id', $this->id)
+            ->whereHas(
+                'jobApplications',
+                fn($query) => $query->where('user_id', '=', $user->id ?? $user)
+            )->exists();
+    }
+
     public function scopeFilter(Builder|QueryBuilder $query, array $filters): Builder|QueryBuilder
     {
         return $query->when($filters['search'] ?? null, function ($query, $search) {
             $query->where(function ($query) use ($search) {
                 $query->where('title', 'like', '%' . $search . '%')
-                    ->orWhere('description', 'like', '%' . $search . '%');
+                    ->orWhere('description', 'like', '%' . $search . '%')
+                    ->orWhereHas('employer', function ($query) use ($search) {
+                        $query->where('company_name', 'like', '%' . $search . '%');
+                    });
             });
         })->when($filters['min_salary'] ?? null, function ($query, $minSalary) {
             $query->where('salary', '>=', $minSalary);
