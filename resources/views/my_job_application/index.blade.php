@@ -33,7 +33,9 @@
     <div class="text-center text-white">
         <div>No applications yet.</div>
         <div>
-            <a href="{{route('jobs.index')}}" class="hover:text-slate-300 hover:underline">Find more here.</a>
+            <a href="{{route('jobs.index')}}" class="hover:text-slate-300 hover:underline">
+                Find more here.
+            </a>
         </div>
     </div>
     @endforelse
