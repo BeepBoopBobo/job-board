@@ -12,13 +12,17 @@
 
 <body
     class="mx-auto h-full bg-no-repeat bg-fixed mt-10 max-w-2xl text-slate-700 bg-gradient-to-b from-indigo-500 via-purple-500 to-pink-500">
-    <nav class="mb-8 flex justify-between text-large font-medium">
+    <nav class="mb-8 flex justify-between text-large font-medium text-white">
         <ul>
             <li><a href="{{route('jobs.index')}}">Home</a></li>
         </ul>
         <ul class="flex space-x-2">
             @auth
-            <li><a href="#">{{auth()->user()->name?? 'Anonymus'}}</a></li>
+            <li>
+                <a href="{{route('my-job-applications.index')}}">
+                    {{auth()->user()->name?? 'Anonymus'}}: Applications
+                </a>
+            </li>
             <li>
                 <form action="{{ route('auth.destroy') }}" method="POST">
                     @csrf
